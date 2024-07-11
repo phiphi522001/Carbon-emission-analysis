@@ -9,7 +9,7 @@ SELECT * FROM product_emission LIMIT 10
 ```
 
 | id | company\_id | country\_id | industry\_group\_id | year | product\_name | weight\_kg | carbon\_footprint\_pcf | upstream\_percent\_total\_pcf | operations\_percent\_total\_pcf | downstream\_percent\_total\_pcf |
-| ---: | ---------: | ---------: | ----------------: | ---: | -----------: | --------: | -------------------: | -------------------------: | ---------------------------: | ---------------------------: |
+| :---: | :---------: | :---------: | :----------------: | :---: | :-----------: | :--------: | :-------------------: | :-------------------------: | :---------------------------: | :---------------------------: |
 | 10056-1-2014 | 82 | 28 | 2 | 2014 | Frosted Flakes(R) Cereal | 0.7485 | 2 | 57.50 | 30.00 | 12.50 |
 | 10056-1-2015 | 82 | 28 | 15 | 2015 | "Frosted Flakes, 23 oz, produced in Lancaster, PA (one carton)" | 0.7485 | 2 | 57.50 | 30.00 | 12.50 |
 | 10222-1-2013 | 83 | 28 | 8 | 2013 | Office Chair | 20.68 | 73 | 80.63 | 17.36 | 2.01 |
@@ -28,7 +28,7 @@ SELECT * FROM companies LIMIT 10
 ```
 
 | id | company\_name |
-| ---: | -----------: |
+| :---: | :-----------: |
 | 1 | "Autodesk, Inc." |
 | 2 | "Casio Computer Co., Ltd." |
 | 3 | "Cisco Systems, Inc." |
@@ -47,7 +47,7 @@ SELECT * FROM countries LIMIT 10
 ```
 
 | id | country\_name |
-| ---: | -----------: |
+| :---: | :-----------: |
 | 1 | Australia |
 | 2 | Belgium |
 | 3 | Brazil |
@@ -66,7 +66,7 @@ SELECT * FROM industry_groups LIMIT 10
 ```
 
 | id | industry_group                                                         | 
-| -: | ---------------------------------------------------------------------: | 
+| :-: | :---------------------------------------------------------------------: | 
 | 1  | "Consumer Durables, Household and Personal Products"                   | 
 | 2  | "Food, Beverage & Tobacco"                                             | 
 | 3  | "Forest and Paper Products - Forestry, Timber, Pulp and Paper, Rubber" | 
