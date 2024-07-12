@@ -2,10 +2,10 @@
 
 This report aims to analyze carbon emissions to examine carbon emissions in various industries. Specifically, identify the sectors with the highest emissions by analyzing them across countries and by year, as well as finding trends.
 
-The database in this project includes 4 tables: product\_emissions, companies, countries, industry\_groups. Those tables contain information regarding the carbon emissions created during the production of goods.
+The database in this project includes 4 tables: product_emissions, companies, countries, industry_groups. Those tables contain information regarding the carbon emissions created during the production of goods.
 
 ```sql
-SELECT * FROM product_emission LIMIT 10
+SELECT * FROM product_emissions LIMIT 10
 ```
 
 | id | company\_id | country\_id | industry\_group\_id | year | product\_name | weight\_kg | carbon\_footprint\_pcf | upstream\_percent\_total\_pcf | operations\_percent\_total\_pcf | downstream\_percent\_total\_pcf |
@@ -21,7 +21,7 @@ SELECT * FROM product_emission LIMIT 10
 | 10661-10-2014 | 85 | 28 | 11 | 2014 | Regular Straight 505® Jeans – Steel (Water | 0.7665 | 15 | N/a (product with insufficient stage-level data) | N/a (product with insufficient stage-level data) | N/a (product with insufficient stage-level data) |
 | 10661-10-2015 | 85 | 28 | 6 | 2015 | Regular Straight 505® Jeans – Steel (Water | 0.7665 | 15 | N/a (product with insufficient stage-level data) | N/a (product with insufficient stage-level data) | N/a (product with insufficient stage-level data) |
 
-Those are first 10 rows of table `"product_emissions"`
+Those are first 10 rows of table `"product_emissions"`.
 
 ```sql
 SELECT * FROM companies LIMIT 10
@@ -40,7 +40,7 @@ SELECT * FROM companies LIMIT 10
 | 9 | "Fuji Xerox Co., Ltd." |
 | 10 | "Gamesa Corporación Tecnológica, S.A." |
 
-Those are first 10 rows of table `"companies"`
+Those are first 10 rows of table `"companies"`.
 
 ```sql
 SELECT * FROM countries LIMIT 10
@@ -59,7 +59,7 @@ SELECT * FROM countries LIMIT 10
 | 9 | France |
 | 10 | Germany |
 
-Those are first 10 rows of table `"countries"`
+Those are first 10 rows of table `"countries"`.
 
 ```sql
 SELECT * FROM industry_groups LIMIT 10
@@ -78,19 +78,19 @@ SELECT * FROM industry_groups LIMIT 10
 | 9  | Chemicals                                                              | 
 | 10 | Commercial & Professional Services                                     | 
 
-Those are first 10 rows of table `"industry_groups"`
+Those are first 10 rows of table `"industry_groups"`.
 
 # Research results
 
-## Product groups generate the most carbon emissions
+## 1. Product groups generate the most carbon emissions
 
-From the prepared data set, we can find top 30 products with the highest carbon emissions through the following query.
+From the prepared data set, we can find top 30 products with the highest carbon emissions through the following query:
 
 ```sql
 SELECT * FROM product_emissions ORDER BY carbon_footprint_pcf DESC LIMIT 30
 ```
 
-The table below is the result of the above query
+The table below is the result of the above query:
 
 | id           | company_id | country_id | industry_group_id | year | product_name                                                                                                                       | weight_kg | carbon_footprint_pcf | upstream_percent_total_pcf                       | operations_percent_total_pcf                     | downstream_percent_total_pcf                     | 
 | -----------: | ---------: | ---------: | ----------------: | ---: | ---------------------------------------------------------------------------------------------------------------------------------: | --------: | -------------------: | -----------------------------------------------: | -----------------------------------------------: | -----------------------------------------------: | 
@@ -128,5 +128,51 @@ The table below is the result of the above query
 
 📄 INSIGHT: From the results table, we can see that the carbon emission level of wind turbine products is the highest on the list. Next are automobile products. They belong to the industry groups Automobiles & Components, Electrical Equipment and Machinery, and Materials the most.
 
+## 2. The industries with the highest contribution to carbon emissions
 
+To find the industry group with the highest carbon emissions, use the following sql query:
+
+ ```sql
+SELECT industry_group_id, SUM(carbon_footprint_pcf) as "SUM CFP" , industry_group 
+FROM product_emissions INNER JOIN industry_groups 
+ON product_emissions.industry_group_id = industry_groups.id
+GROUP BY industry_group_id ORDER BY 2 DESC
+```
+
+We will get a result table as below:
+
+| industry_group_id | SUM CFP | industry_group                                                         | 
+| :----------------: | :------: | :---------------------------------------------------------------------: | 
+| 13                | 9801558 | Electrical Equipment and Machinery                                     | 
+| 7                 | 2582264 | Automobiles & Components                                               | 
+| 19                | 577595  | Materials                                                              | 
+| 25                | 363776  | Technology Hardware & Equipment                                        | 
+| 8                 | 258712  | Capital Goods                                                          | 
+| 2                 | 111131  | "Food, Beverage & Tobacco"                                             | 
+| 5                 | 72486   | "Pharmaceuticals, Biotechnology & Life Sciences"                       | 
+| 9                 | 62369   | Chemicals                                                              | 
+| 24                | 46544   | Software & Services                                                    | 
+| 20                | 23017   | Media                                                                  | 
+| 14                | 10774   | Energy                                                                 | 
+| 3                 | 8909    | "Forest and Paper Products - Forestry, Timber, Pulp and Paper, Rubber" | 
+| 4                 | 8181    | "Mining - Iron, Aluminum, Other Metals"                                | 
+| 11                | 7309    | Consumer Durables & Apparel                                            | 
+| 10                | 5265    | Commercial & Professional Services                                     | 
+| 12                | 2988    | Containers & Packaging                                                 | 
+| 27                | 2022    | Tires                                                                  | 
+| 16                | 1481    | Food & Staples Retailing                                               | 
+| 1                 | 931     | "Consumer Durables, Household and Personal Products"                   | 
+| 26                | 418     | Telecommunication Services                                             | 
+| 6                 | 387     | "Textiles, Apparel, Footwear and Luxury Goods"                         | 
+| 30                | 244     | Utilities                                                              | 
+| 29                | 239     | Trading Companies & Distributors and Commercial Services & Supplies    | 
+| 15                | 141     | Food & Beverage Processing                                             | 
+| 17                | 122     | Gas Utilities                                                          | 
+| 22                | 54      | Semiconductors & Semiconductor Equipment                               | 
+| 21                | 30      | Retailing                                                              | 
+| 23                | 3       | Semiconductors & Semiconductors Equipment                              | 
+| 28                | 1       | Tobacco                                                                | 
+| 18                | 0       | Household & Personal Products                                          | 
+
+📄 INSIGHT: So, the industries that contribute the most to carbon emissions into the environment are industries with id codes 7, 13, 19.
 
