@@ -1,10 +1,62 @@
 # Carbon emission analysis
 
+## Project overview
+
 This report aims to analyze carbon emissions to examine the carbon footprint across various industries. We aim to identify sectors with the highest levels of emissions by analyzing them across countries and years, as well as to uncover trends.
 
 Carbon emissions play a crucial role in the environment, accounting for over 75% of global emissions and posing a significant environmental challenge. These emissions contribute to the accumulation of greenhouse gases in the atmosphere, leading to climate change, planetary warming, and involvement in various environmental disasters.
 
 Through this analysis, we hope to gain an understanding of the environmental impact of different industries and contribute to making informed decisions in sustainable development.
+
+## Datasets used
+
+Our dataset is compiled from publicly available data from nature.com and encompasses the product carbon footprints (PCF) for various companies. PCFs represent the greenhouse gas emissions associated with specific products, quantified in CO2 (carbon dioxide equivalent).
+
+The dataset consists of 4 tables containing information regarding carbon emissions generated during the production of goods.
+
+Tables's columns description:
+
+Table **'product_emissions'**:
+- **id**: Identifier for each product emission record.
+- **company_id**: Identifier for the company associated with the product.
+- **country_id**: Identifier for the country where the product is being produced.
+- **industry_group_id**: Identifier for the industry group to which the product belongs.
+- **year**: The year in which the emissions data was recorded.
+- **product_name**: The name of the product associated with the emissions data.
+- **weight_kg**: The weight of the product in kilograms.
+- **carbon_footprint_pcf**: The carbon footprint of the product, measured in CO2 equivalent.
+- **upstream_percent_total_pcf**: The percentage of the total carbon footprint attributed to upstream activities.
+- **operations_percent_total_pcf**: The percentage of the total carbon footprint attributed to operations.
+- **downstream_percent_total_pcf**: The percentage of the total carbon footprint attributed to downstream activities.
+ 
+
+Table **'industry_groups'**:
+- **id**: Unique identifier for each industry group.
+- **industry_group**: The name of the industry group, categorizing businesses within similar sectors based on their products or services offered.
+ 
+
+Table **'companies'**:
+- **id**: Unique identifier for each company.
+- **company_name**: The name of the company, identifying the specific organization within the dataset.
+ 
+
+Table **'countries'**:
+- **id**: Unique identifier for each country.
+- **country_name**: The name of the country.
+
+## How to execute this project
+
+To execute this project you need to have access to the database named 'carbon_emissions', to be able to manipulate this database without having to download or when you do not have database management applications then access the [online SQL console](https://api.swisscoding.edu.vn/sqlexec/?database=carbon_emissions&standalone=true). This console already includes the database named **'carbon_emissions'**.
+
+You can also connect to the database and execute queries using any MySQL-compatible client, including DBeaver. Connection details for a database client:
+
+- Host/Server:	112.213.86.31
+- Port: 3360
+- Username:	marshmallow
+- Password:	N3unkNbXQYh33og
+- Database:	carbon_emissions
+
+## Overview of data in each table
 
 ```sql
 SELECT * FROM product_emissions LIMIT 10
@@ -82,9 +134,9 @@ SELECT * FROM industry_groups LIMIT 10
 
 Those are first 10 rows of table `industry_groups`.
 
-# Research results
+## Research results
 
-## 1. Product groups generate the most carbon emissions
+### 1. Product groups generate the most carbon emissions
 
 From the prepared data set, we can find top 30 products with the highest carbon emissions through the following query:
 
@@ -130,7 +182,7 @@ The table below is the result of the above query:
 
 📄 INSIGHT: From the results table, we can see that the carbon emission level of wind turbine products is the highest on the list. Next are automobile products. They belong to the industry groups Automobiles & Components, Electrical Equipment and Machinery, and Materials the most.
 
-## 2. The industries with the highest contribution to carbon emissions
+### 2. The industries with the highest contribution to carbon emissions
 
 To find the industry group with the highest carbon emissions, use the following sql query:
 
@@ -179,7 +231,7 @@ We will get a result table as below:
 
 📄 INSIGHT: So, the industries that contribute the most to carbon emissions into the environment are industries with id codes 7, 13, 19.
 
-## 3. The companies with the highest contribution to carbon emissions
+### 3. The companies with the highest contribution to carbon emissions
 
 To find the company with the highest carbon emissions during its operations, use the query below: 
 
@@ -207,7 +259,7 @@ The results of the query are shown in the following table:
 
 📄 INSIGHT: So the companies listed in the results table are the top companies in contributing carbon emissions to the environment. Most of them belong to the automobile manufacturing sector.
 
-## 4. The countries with the highest contribution to carbon emissions
+### 4. The countries with the highest contribution to carbon emissions
 
 To find the countries with the highest carbon emissions, use the query below: 
 
@@ -235,7 +287,7 @@ Executing the query, we obtain the results table below:
 
 📄 INSIGHT: We can see that the countries leading economically and holding key positions in the field of industrial production are the countries with the highest carbon emissions.
 
-## 5. The trend of carbon footprints (PCFs) over the years
+### 5. The trend of carbon footprints (PCFs) over the years
 
 To find the trend of PCFs through each year, use the sql statement below: 
 
@@ -255,7 +307,7 @@ What we got here:
 
 📄 INSIGHT: Every year carbon emissions increase according to the development of the world economy. In 2015 alone, this number reached the largest level on the list because wind turbines were produced and operated 24/7 on a large scale.
 
-## 6. Carbon emission reduction over the years of each industry
+### 6. Carbon emission reduction over the years of each industry
 
 To find the year-over-year carbon emission reduction of each industry, use the following query:
 
